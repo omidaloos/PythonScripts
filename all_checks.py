@@ -23,6 +23,10 @@ def check_root_full():
     """Returns true if the root partition is full, false otherwise"""
     return check_disk_full(disk="/", min_gb=2, min_percent=10)
 
+def check_no_network():
+    """Returns true if it fails to resolve Google's URL, false otherwise."""
+    pass
+
 def main():
     checks = [
         (check_reboot, "Pending reboot."),
