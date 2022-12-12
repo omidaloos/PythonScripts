@@ -13,5 +13,5 @@ def check_connectivity():
         return True  
 
 
-print("new "check_connectivity())
+print("test" + check_connectivity())
 print(check_localhost())
