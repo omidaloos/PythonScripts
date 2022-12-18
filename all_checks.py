@@ -6,6 +6,8 @@ import sys
 import socket
 import psutil
 
+# Checks various system issues
+
 def check_reboot():
     """Returns true if the computer has pending reboot."""
     return os.path.exists("/run/reboot-required")
