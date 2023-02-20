@@ -13,9 +13,9 @@ website = requests.get(url)
 html = website.text
 
 # use re.findall to grab all the links
-links = re.findall('"((http|ftp)s?://.*?)"', html)
+links = re.findall('"((http|ftp)s?://.*?/.*?)"', html)
 
-print (html)
+print (links)
 # output links
 # for link in links:
 #     print(link[0])

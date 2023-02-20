@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 
+
 import os
 import shutil
 import sys
 import socket
 import psutil
+import smtplib
+from email.mime.text import MIMEText
 
-# Checks various system issues
+### CHECKS
 
 def check_reboot():
     """Returns true if the computer has pending reboot."""
@@ -38,8 +41,31 @@ def check_no_network():
         return False
     except:
         return True
+    
+### END OF CHECKS
+
+### EMAIL FUNCTIONALITY 
+    
+def send_email(subject, body, sender, recipient, password):
+    """Used to send an email to a recipient"""
+    msg = MIMEText(body)
+    msg['Subject'] = subject
+    msg['From'] = sender
+    msg['To'] = recipient #', '.join(recipient)
+    smtp_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+    smtp_server.login(sender, password)
+    smtp_server.sendmail(sender, recipient, msg.as_string())
+    smtp_server.quit()
+
+# Get gmail app password from separate file    
+with open ('/Users/Omid/Desktop/Portfolio/GitPortfolio/PythonScripts/Email/GmailAppPassword.txt', 'r') as file:
+    pswd = file.read()
+
+### END OF EMAIL FUNCTIONALITY 
 
 def main():
+    """Preforms all checks and sends an email if any do not pass and exits with status code (1). 
+    Exits with status code (0) otherwise. """
     checks = [
         (check_reboot, "Pending reboot."),
         (check_root_full, "Root partition full."),
@@ -51,9 +77,11 @@ def main():
     
     for check, msg in checks:
         if check():
+            everything_ok = False
+            send_email("Issue on server", msg, "omidaloos111@gmail.com", "omidaloos321@gmail.com", pswd)
             print (msg)
             sys.exit(1)
-            everything_ok = False
+            
         if not everything_ok:
             sys.exit(1)
             
