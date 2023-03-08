@@ -63,6 +63,9 @@ with open ('/Users/Omid/Desktop/Portfolio/GitPortfolio/PythonScripts/Email/Gmail
 
 ### END OF EMAIL FUNCTIONALITY 
 
+
+### MAIN FUNCTION
+
 def main():
     """Preforms all checks and sends an email if any do not pass and exits with status code (1). 
     Exits with status code (0) otherwise. """

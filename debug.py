@@ -1,3 +1,3 @@
-import EmailScript
+import Email.EmailScript as EmailScript
 
 print(dir(EmailScript))
